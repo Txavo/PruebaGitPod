@@ -1,6 +1,6 @@
 import random
 
-palabras = ["árbol", "ordenador", "teclado", "ratón", "monitor"]
+palabras = ["arbol", "ordenador", "teclado", "raton", "monitor"]
 
 class Ahorcado:
     def __init__(self):
