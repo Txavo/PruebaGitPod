@@ -14,3 +14,6 @@ a = empleado(1, 'Juan', 25)
 
 a.get_data()
 
+
+
+
