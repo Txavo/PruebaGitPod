@@ -74,6 +74,7 @@ class Persona:
 #Fuera de la clase, definimos un objeto "ciudadano" de la clase Persona
 #Le pasamos el nombre al constructor de la clase
 ciudadano = Persona("Alonso Javier")
+
 # Con los setters establecemos los datos del ciudadano
 ciudadano.setApellidos('Lucas Sánchez')
 ciudadano.setCiudad('Murcia')
