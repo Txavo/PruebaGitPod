@@ -24,3 +24,5 @@ def ccitt_crc16(data: bytes):
 
 
 bytes_CRC = 
+
+print(ccitt_crc16(bytes_CRC))
