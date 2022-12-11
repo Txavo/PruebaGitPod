@@ -5,7 +5,7 @@ class ccitt_crc_xmodem:
         self.seed = seed
 
 
-    def ccitt_crc16(data: bytes) -> int:
+    def ccitt_crc16(self, data: bytes) -> int:
 
         # Inicializamos el CRC con el valor inicial predeterminado
         crc = 0x0000
@@ -28,6 +28,12 @@ class ccitt_crc_xmodem:
 
         # Aplicamos una máscara al CRC final para obtener solo los 16 bits más significativos
         return crc & 0xFFFF
+
+    def int2bytes(self, data):
+        return data.to_bytes(2, 'big')
+
+    def mostrar_CRC(self, bytes):
+        print([bytes.hex()[x:x+2] for x in range(0, len(bytes.hex()), 2)]) 
 
     
 CntMessage  = int('0x00', 16)     # 1 byte
@@ -55,12 +61,11 @@ obj_b = ccitt_crc_xmodem(0x1021)
 CRC_a_int = obj_a.ccitt_crc16(a_bytesToSend)
 CRC_b_int = obj_b.ccitt_crc16(b_bytesToSend)
 
-CRC_a_hex = CRC_a_int.to_bytes(2, 'big').hex() 
-CRC_b_hex = CRC_b_int.to_bytes(2, 'big').hex() 
+CRC_a_bytes = obj_a.int2bytes(CRC_a_int)
+CRC_b_bytes = obj_b.int2bytes(CRC_b_int)
 
-print([CRC_a_hex[x:x+2] for x in range(0, len(CRC_a_hex), 2)])
-print([CRC_b_hex[x:x+2] for x in range(0, len(CRC_b_hex), 2)])
-
+obj_a.mostrar_CRC(CRC_a_bytes)
+obj_b.mostrar_CRC(CRC_b_bytes)
 
 # 00 04 (liberar)   CRC 41 84
 # 00 06 (accionado) CRC 61 C6
