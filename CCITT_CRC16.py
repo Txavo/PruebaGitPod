@@ -1,14 +1,15 @@
 import struct
 
 class ccitt_crc_xmodem:
-    def __init__(self, seed):
+    def __init__(self, seed, init_crc_value):
         self.seed = seed
+        self.init_crc_value = init_crc_value
 
 
     def ccitt_crc16(self, data: bytes) -> int:
 
         # Inicializamos el CRC con el valor inicial predeterminado
-        crc = 0x0000
+        crc = self.init_crc_value
 
         # Iteramos sobre cada byte de datos
         for byte in data:
@@ -55,8 +56,8 @@ b_bytesToSend =  (struct.pack('B', CntMessage)  +
                   struct.pack('B', OpCodLSB))   
 
 
-obj_a = ccitt_crc_xmodem(0x1021)
-obj_b = ccitt_crc_xmodem(0x1021)
+obj_a = ccitt_crc_xmodem(0x1021, 0x0000)
+obj_b = ccitt_crc_xmodem(0x1021, 0x0000)
 
 CRC_a_int = obj_a.ccitt_crc16(a_bytesToSend)
 CRC_b_int = obj_b.ccitt_crc16(b_bytesToSend)
