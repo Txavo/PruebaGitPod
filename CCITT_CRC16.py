@@ -1,7 +1,9 @@
-# def ccitt_crc16(data: bytes) -> int:
-def ccitt_crc16(data: bytes):
+import struct
+
+def ccitt_crc16(data: bytes) -> int:
+
     # Inicializamos el CRC con el valor inicial predeterminado
-    crc = 0xFFFF
+    crc = 0x0000
 
     # Iteramos sobre cada byte de datos
     for byte in data:
@@ -22,7 +24,21 @@ def ccitt_crc16(data: bytes):
     # Aplicamos una máscara al CRC final para obtener solo los 16 bits más significativos
     return crc & 0xFFFF
 
+    
+CntMessage  = int('0x00', 16)     # 1 byte
+Command     = int('0x00', 16)     # 1 byte
+OpCodMSB    = int('0x00', 16)     # 1 byte
+OpCodLSB    = int('0x06', 16)     # 1 byte
 
-bytes_CRC = 
+    
+bytesToSend =  (struct.pack('B', CntMessage)  +
+                struct.pack('B', Command)     +
+                struct.pack('B', OpCodMSB)    +
+                struct.pack('B', OpCodLSB))   
 
-print(ccitt_crc16(bytes_CRC))
+
+CRC = ccitt_crc16(bytesToSend)
+print(CRC)
+
+# 00 04 (liberar)   CRC 41 84
+# 00 06 (accionado) CRC 61 C6
