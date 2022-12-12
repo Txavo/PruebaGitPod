@@ -34,7 +34,8 @@ class ccitt_crc_xmodem:
         return data.to_bytes(2, 'big')
 
     def mostrar_CRC(self, bytes):
-        print([bytes.hex()[x:x+2] for x in range(0, len(bytes.hex()), 2)]) 
+        print([bytes.hex()[x:x+2] for x in range(0, len(bytes.hex()), 2)])
+
 
     
 CntMessage  = int('0x00', 16)     # 1 byte
