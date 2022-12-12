@@ -55,17 +55,38 @@ b_bytesToSend =  (struct.pack('B', CntMessage)  +
                   struct.pack('B', OpCodMSB)    +
                   struct.pack('B', OpCodLSB))   
 
+OpCodLSB    = int('0x03', 16)     # 1 byte
+
+c_bytesToSend =  (struct.pack('B', CntMessage)  +
+                  struct.pack('B', Command)     +
+                  struct.pack('B', OpCodMSB)    +
+                  struct.pack('B', OpCodLSB))   
+
+OpCodLSB    = int('0x05', 16)     # 1 byte
+
+d_bytesToSend =  (struct.pack('B', CntMessage)  +
+                  struct.pack('B', Command)     +
+                  struct.pack('B', OpCodMSB)    +
+                  struct.pack('B', OpCodLSB))   
 
 obj = ccitt_crc_xmodem(0x1021, 0x0000)
 
 CRC_a_int = obj.ccitt_crc16(a_bytesToSend)
 CRC_b_int = obj.ccitt_crc16(b_bytesToSend)
+CRC_c_int = obj.ccitt_crc16(c_bytesToSend)
+CRC_d_int = obj.ccitt_crc16(d_bytesToSend)
 
 CRC_a_bytes = obj.int2bytes(CRC_a_int)
 CRC_b_bytes = obj.int2bytes(CRC_b_int)
+CRC_c_bytes = obj.int2bytes(CRC_c_int)
+CRC_d_bytes = obj.int2bytes(CRC_d_int)
 
 obj.mostrar_CRC(CRC_a_bytes)
 obj.mostrar_CRC(CRC_b_bytes)
+obj.mostrar_CRC(CRC_c_bytes)
+obj.mostrar_CRC(CRC_d_bytes)
 
-# 00 04 (liberar)   CRC 41 84
-# 00 06 (accionado) CRC 61 C6
+# a =>   CRC 41 84
+# b =>   CRC 61 C6
+# c =>   CRC 31 63
+# d =>   CRC 51 A5
