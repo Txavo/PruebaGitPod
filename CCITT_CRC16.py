@@ -56,17 +56,16 @@ b_bytesToSend =  (struct.pack('B', CntMessage)  +
                   struct.pack('B', OpCodLSB))   
 
 
-obj_a = ccitt_crc_xmodem(0x1021, 0x0000)
-obj_b = ccitt_crc_xmodem(0x1021, 0x0000)
+obj = ccitt_crc_xmodem(0x1021, 0x0000)
 
-CRC_a_int = obj_a.ccitt_crc16(a_bytesToSend)
-CRC_b_int = obj_b.ccitt_crc16(b_bytesToSend)
+CRC_a_int = obj.ccitt_crc16(a_bytesToSend)
+CRC_b_int = obj.ccitt_crc16(b_bytesToSend)
 
-CRC_a_bytes = obj_a.int2bytes(CRC_a_int)
-CRC_b_bytes = obj_b.int2bytes(CRC_b_int)
+CRC_a_bytes = obj.int2bytes(CRC_a_int)
+CRC_b_bytes = obj.int2bytes(CRC_b_int)
 
-obj_a.mostrar_CRC(CRC_a_bytes)
-obj_b.mostrar_CRC(CRC_b_bytes)
+obj.mostrar_CRC(CRC_a_bytes)
+obj.mostrar_CRC(CRC_b_bytes)
 
 # 00 04 (liberar)   CRC 41 84
 # 00 06 (accionado) CRC 61 C6
