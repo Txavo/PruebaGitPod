@@ -86,7 +86,9 @@ obj.mostrar_CRC(CRC_b_bytes)
 obj.mostrar_CRC(CRC_c_bytes)
 obj.mostrar_CRC(CRC_d_bytes)
 
-# a =>   CRC 41 84
-# b =>   CRC 61 C6
-# c =>   CRC 31 63
-# d =>   CRC 51 A5
+assert CRC_a_bytes == bytearray([0x41, 0x84])
+assert CRC_b_bytes == bytearray([0x61, 0xC6])
+assert CRC_c_bytes == bytearray([0x31, 0x63])
+assert CRC_d_bytes == bytearray([0x51, 0xA5])
+
+print("\nCRC calculado correctamente..\n")
